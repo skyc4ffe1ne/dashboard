@@ -11,13 +11,13 @@ export default function Dashboard() {
     card_1:
       "col-start-1 col-end-3 row-start-2 h-[142px] rounded-xl border-[1px] border-slate-900/10 dark:border-stone-800 sm:col-start-2 sm:col-end-4 sm:row-start-1 lg:col-start-1 lg:col-end-2",
     card_2:
-      "col-start-1 col-end-4 rounded-xl border-[1px] border-slate-900/10 p-8 sm:row-start-2 lg:col-end-5 lg:row-end-4 xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-4 dark:border-stone-800 relative overflow-hidden",
+      "col-start-1 col-end-4 rounded-xl border-[1px] border-slate-900/10 lg:p-8 p-4 sm:row-start-2 lg:col-end-5 lg:row-end-4 xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-4 dark:border-stone-800 relative overflow-hidden mediaChart",
     card_3:
       "col-start-2 col-end-4 rounded-xl border-[1px] border-slate-900/10 dark:border-stone-800 sm:col-start-1 sm:col-end-3 sm:row-start-3 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-1 xl:row-start-3 xl:row-end-4",
     card_4:
-      "col-start-3 row-start-2 h-[142px] rounded-xl sm:col-start-1 sm:row-start-1 lg:col-start-2 xl:col-start-1 xl:row-start-2 xl:row-end-4 xl:h-auto border-[1px] border-slate-900/10 dark:border-stone-800",
+      "col-start-3 row-start-2 h-[142px] rounded-xl sm:col-start-1 sm:row-start-1 lg:col-start-2 xl:col-start-1 xl:row-start-2 xl:row-end-4 xl:h-auto border-[1px] border-slate-900/10 dark:border-stone-800 relative overflow-hidden",
     card_5:
-      "col-start-1 row-start-3 min-w-[138px] rounded-xl sm:col-start-3 lg:col-start-4 lg:row-start-1 xl:col-start-3 xl:row-start-1 xl:row-end-3 border-[1px] border-slate-900/10 dark:border-stone-800",
+      "col-start-1 row-start-3 min-w-[138px] rounded-xl sm:col-start-3 lg:col-start-4 lg:row-start-1 xl:col-start-3 xl:row-start-1 xl:row-end-3 border-[1px] border-slate-900/10 dark:border-stone-800 relative overflow-hidden p-4",
   };
 
   return (
@@ -41,6 +41,7 @@ export default function Dashboard() {
         </div>
         {/*Chart container */}
         <div className={gridStyle.card_2}>
+          <div className="absolute left-1/2 top-3/4 h-48 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-300 to-green-500 opacity-40 blur-2xl dark:opacity-25"></div>
           <h3 className="text-xl text-stone-950 dark:text-stone-300">
             Indicators
           </h3>
@@ -66,8 +67,6 @@ export default function Dashboard() {
                 <Icons src={arrowChart} alt="ico-arrow" />
               </div>
             </div>
-
-            <div className="absolute left-1/2 top-3/4 h-48 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-300 to-green-500 opacity-25 blur-2xl"></div>
           </div>
         </div>
         {/**Card Check in */}
@@ -80,10 +79,16 @@ export default function Dashboard() {
         </div>
         {/**Secondary Chart */}
         <div className={gridStyle.card_4}>
+          <div className="absolute left-0 top-0 h-48 w-2/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-40 blur-2xl dark:opacity-25"></div>
+
+          <div className="absolute bottom-1/4 right-0 h-24 w-1/4 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-40 blur-2xl dark:opacity-25"></div>
           <Chart_2 />
         </div>
         {/**Secondary Chart */}
         <div className={gridStyle.card_5}>
+          <div className="absolute left-full top-0 h-48 w-2/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-300 to-violet-500 opacity-40 blur-2xl dark:opacity-25"></div>
+
+          <div className="absolute bottom-1/4 right-full h-24 w-1/4 rounded-full bg-gradient-to-r from-violet-300 to-violet-500 opacity-40 blur-2xl dark:opacity-25"></div>
           <Chart_3 />
         </div>
       </div>

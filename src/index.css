@@ -6,7 +6,18 @@
   stroke: rgb(41 37 36);
 }
 
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgb(231 229 228);
+}
+
 .recharts-polar-grid-angle line,
 .recharts-polar-grid-concentric path {
   stroke: rgb(41 37 36);
+}
+
+@media screen and (min-width: 1024px) {
+  .mediaChart .recharts-responsive-container {
+    height: 65% !important;
+  }
 }

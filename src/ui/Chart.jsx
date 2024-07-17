@@ -50,7 +50,11 @@ const data = [
 export default function Chart() {
   return (
     //Make the chart responsive
-    <ResponsiveContainer width="100%" height="65%">
+    <ResponsiveContainer
+      width="100%"
+      height="65%"
+      className="!lg:h-[65%] !h-[50%]"
+    >
       {/* Visual chart */}
       <AreaChart data={data}>
         <CartesianGrid strokeDasharray="6 6" />

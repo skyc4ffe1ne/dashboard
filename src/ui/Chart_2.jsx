@@ -46,7 +46,10 @@ export default function Chart_2() {
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="63%" data={data}>
         <PolarGrid />
-        <PolarAngleAxis dataKey="subject" className="text-xs font-extralight" />
+        <PolarAngleAxis
+          dataKey="subject"
+          className="hidden text-xs font-extralight sm:block"
+        />
         {/* <PolarRadiusAxis /> */}
         <Tooltip />
         <Radar
