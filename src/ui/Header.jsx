@@ -4,9 +4,9 @@ export default function Header() {
   return (
     <header className="flex justify-between border-b-[1px] border-slate-900/10 py-4 pl-12 pr-4 dark:border-stone-800 sm:px-12 sm:py-4">
       <div className="flex items-center gap-1 sm:gap-3">
-        <p className="font-thin text-stone-700 dark:text-stone-300">
-          <span className="text-stone-500">&gt;</span>&gt;
-        </p>
+        {/* <p className="font-thin text-stone-700 dark:text-stone-300">
+          {/* <span className="text-stone-500">&gt;</span>&gt; 
+        </p> */}
         <h2 className="text-xl font-thin text-stone-950 dark:text-stone-50">
           {" "}
           Dashboard{" "}
