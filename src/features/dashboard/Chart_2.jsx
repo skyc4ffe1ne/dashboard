@@ -3,7 +3,6 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
@@ -41,6 +40,11 @@ const data = [
   },
 ];
 
+const styleTooltip = {
+  borderRadius: "0.25rem",
+  border: "none",
+  padding: "10px",
+};
 export default function Chart_2() {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -50,8 +54,7 @@ export default function Chart_2() {
           dataKey="subject"
           className="hidden text-xs font-extralight sm:block"
         />
-        {/* <PolarRadiusAxis /> */}
-        <Tooltip />
+        <Tooltip contentStyle={styleTooltip} />
         <Radar
           name="Booking"
           dataKey="A"

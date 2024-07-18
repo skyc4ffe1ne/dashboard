@@ -6,7 +6,7 @@ import calendar from "../assets/calendar.svg";
 import dashboard from "../assets/dashboard.svg";
 import logo from "../assets/logo.svg";
 import moon from "../assets/moon.svg";
-import hamburger from "../assets/hamburger.svg";
+import hamburger from "../assets/hamburgerArrow.svg";
 import user from "../assets/user.svg";
 import exit from "../assets/exit.svg";
 import sun from "../assets/sun.svg";
@@ -52,12 +52,12 @@ export default function Sidebar() {
   }, [theme]);
 
   const liStyle =
-    "shadowhover:border-stone-800 flex items-center justify-center rounded-xl border-[1px] border-transparent hover:border-stone-300";
+    "hover:border-stone-800 flex items-center justify-center rounded-xl border-[1px] border-transparent hover:border-stone-300";
 
   if (!visible)
     return (
       <div
-        className="absolute left-2 top-[1.6rem] cursor-pointer"
+        className="absolute left-2 top-[1.5rem] cursor-pointer"
         onClick={() => setVisible(true)}
       >
         <Icon src={hamburger} alt="ico-hamburger" />
@@ -65,7 +65,7 @@ export default function Sidebar() {
     );
   return (
     <div
-      className={`${visible ? "left-0" : "-left-48"} absolute z-50 min-h-screen border-r-[1px] border-slate-900/10 bg-stone-50 px-4 py-4 text-black dark:border-stone-800 dark:bg-stone-950 dark:text-white sm:static`}
+      className={`${visible ? "translate-x-0" : "-translate-x-full"} absolute z-50 flex min-h-screen flex-col border-r-[1px] border-slate-900/10 bg-stone-50 px-4 py-4 text-black transition-all duration-300 ease-in-out dark:border-stone-800 dark:bg-stone-950 dark:text-white sm:static`}
       ref={sidebarRef}
     >
       <div className="flex items-center justify-center pb-4">
@@ -96,7 +96,7 @@ export default function Sidebar() {
           </li>
         </ul>
       </nav>
-      <ul class="flex h-sidebar-height flex-col justify-end gap-3">
+      <ul class="mt-auto flex h-sidebar-height flex-col justify-end gap-3">
         <li
           className="flex cursor-pointer justify-center"
           onClick={() => setTheme((t) => !t)}

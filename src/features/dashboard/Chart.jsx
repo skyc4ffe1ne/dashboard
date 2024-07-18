@@ -47,6 +47,13 @@ const data = [
   },
 ];
 
+const styleTooltip = {
+  // backgroundColor: "rgba(255, 255, 255, 0.5)",
+  borderRadius: "0.25rem",
+  border: "none",
+  padding: "10px",
+};
+
 export default function Chart() {
   return (
     //Make the chart responsive
@@ -61,14 +68,13 @@ export default function Chart() {
         {/*Style labels, and show the XAxis */}
         <XAxis
           dataKey="name"
-          //   tick={{ fill: "red" }}
+          tick={{ fill: "#78716c" }}
           tickLine={{ stroke: "transparent" }}
-          className="text-sm font-extralight"
+          className="custom-tooltip text-sm font-extralight"
         />
-        {/* <YAxis unit="$" tick={{ fill: "blue" }} /> */}
 
         {/*Show the data on hover */}
-        <Tooltip />
+        <Tooltip contentStyle={styleTooltip} />
 
         <Area
           type="monotone"

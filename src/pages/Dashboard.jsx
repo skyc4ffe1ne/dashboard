@@ -1,8 +1,9 @@
-import Card from "../ui/Card.jsx";
-import Chart from "../ui/Chart.jsx";
-import Chart_2 from "../ui/Chart_2.jsx";
-import Chart_3 from "../ui/Chart_3.jsx";
+import Card from "../features/dashboard/Card.jsx";
+import Chart from "../features/dashboard/Chart.jsx";
+import Chart_2 from "../features/dashboard/Chart_2.jsx";
+import Chart_3 from "../features/dashboard/Chart_3.jsx";
 import Icons from "../ui/Icons.jsx";
+import BlurEffect from "../ui/BlurEffect.jsx";
 import arrowChart from "../assets/arrowChart.svg";
 export default function Dashboard() {
   const gridStyle = {
@@ -41,7 +42,7 @@ export default function Dashboard() {
         </div>
         {/*Chart container */}
         <div className={gridStyle.card_2}>
-          <div className="absolute left-1/2 top-3/4 h-48 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-300 to-green-500 opacity-40 blur-2xl dark:opacity-25"></div>
+          <BlurEffect type="xl" />
           <h3 className="text-xl text-stone-950 dark:text-stone-300">
             Indicators
           </h3>
@@ -79,16 +80,14 @@ export default function Dashboard() {
         </div>
         {/**Secondary Chart */}
         <div className={gridStyle.card_4}>
-          <div className="absolute left-0 top-0 h-48 w-2/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-40 blur-2xl dark:opacity-25"></div>
-
-          <div className="absolute bottom-1/4 right-0 h-24 w-1/4 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-40 blur-2xl dark:opacity-25"></div>
+          <BlurEffect type="lg-l-yellow" />
+          <BlurEffect type="sm-r-yellow" />
           <Chart_2 />
         </div>
         {/**Secondary Chart */}
         <div className={gridStyle.card_5}>
-          <div className="absolute left-full top-0 h-48 w-2/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-300 to-violet-500 opacity-40 blur-2xl dark:opacity-25"></div>
-
-          <div className="absolute bottom-1/4 right-full h-24 w-1/4 rounded-full bg-gradient-to-r from-violet-300 to-violet-500 opacity-40 blur-2xl dark:opacity-25"></div>
+          <BlurEffect type="lg-r-violet" />
+          <BlurEffect type="sm-l-violet" />
           <Chart_3 />
         </div>
       </div>

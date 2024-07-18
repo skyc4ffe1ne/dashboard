@@ -1,19 +1,8 @@
-// import {
-//   ResponsiveContainer,
-//   PieChart,
-//   Pie,
-//   Legend,
-//   Tooltip,
-//   Label,
-// } from "recharts";
-// import { BarChart, Bar, ResponsiveContainer } from "recharts";
-
 import {
   Radar,
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
@@ -26,6 +15,12 @@ const data = [
   { duration: "8,10", value: 3, durationN: 8 },
   { duration: "11+", value: 2, durationN: 11 },
 ];
+const styleTooltip = {
+  // backgroundColor: "rgba(255, 255, 255, 0.5)",
+  borderRadius: "0.25rem",
+  border: "none",
+  padding: "10px",
+};
 
 export default function Chart_3() {
   return (
@@ -36,7 +31,7 @@ export default function Chart_3() {
           dataKey="duration"
           className="hidden text-xs font-extralight sm:block"
         />
-        <Tooltip />
+        <Tooltip contentStyle={styleTooltip} />
         <Radar
           name="prenotazioni"
           dataKey="value"
