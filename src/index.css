@@ -21,3 +21,8 @@
     height: 65% !important;
   }
 }
+
+.primaryChart {
+  stroke: "red" !important;
+  fill: "red" !important;
+}

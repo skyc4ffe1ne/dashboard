@@ -18,6 +18,21 @@ export default function Sidebar() {
   const [visible, setVisible] = useState(true);
   const sidebarRef = useRef(null);
 
+  useEffect(function () {
+    /**Check for saved theme at first render */
+    const themeSaved = localStorage.getItem("theme");
+    console.log(themeSaved);
+    if (themeSaved !== null) {
+      setTheme(JSON.parse(themeSaved)); // Imposta il tema salvato dal localStorage
+      // Aggiorna il documento HTML con la classe del tema (opzionale)
+      if (JSON.parse(themeSaved)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }, []);
+
   function handleResize() {
     if (window.innerWidth < 640) {
       setVisible(false);
@@ -43,16 +58,19 @@ export default function Sidebar() {
     document.addEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    if (theme) {
+  function handleTheme() {
+    const newTheme = !theme;
+    setTheme(newTheme);
+    localStorage.setItem("theme", JSON.stringify(newTheme));
+    if (newTheme) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [theme]);
+  }
 
   const liStyle =
-    "hover:border-stone-800 flex items-center justify-center rounded-xl border-[1px] border-transparent hover:border-stone-300";
+    "hover:border-stone-300 flex items-center justify-center rounded-xl border-[1px] border-transparent dark:hover:border-stone-800";
 
   if (!visible)
     return (
@@ -65,7 +83,7 @@ export default function Sidebar() {
     );
   return (
     <div
-      className={`${visible ? "translate-x-0" : "-translate-x-full"} absolute z-50 flex min-h-screen flex-col border-r-[1px] border-slate-900/10 bg-stone-50 px-4 py-4 text-black transition-all duration-300 ease-in-out dark:border-stone-800 dark:bg-stone-950 dark:text-white sm:static`}
+      className={`${visible ? "translate-x-0" : "-translate-x-full"} absolute z-50 flex min-h-screen flex-col border-r-[1px] border-slate-900/10 bg-stone-50 px-4 py-4 text-black dark:border-stone-800 dark:bg-stone-950 dark:text-white sm:static`}
       ref={sidebarRef}
     >
       <div className="flex items-center justify-center pb-4">
@@ -74,13 +92,13 @@ export default function Sidebar() {
       <nav>
         <ul className="flex flex-col gap-3">
           <li className={liStyle}>
-            <NavLink to="/" className="px-3 py-3">
+            <NavLink to="/" className="rounded-xl px-3 py-3">
               <Icon src={dashboard} alt="ico-dashboard" />
             </NavLink>
           </li>
 
           <li className={liStyle}>
-            <NavLink to="/calendar" className="px-3 py-3">
+            <NavLink to="/calendar" className="rounded-xl px-3 py-3">
               <Icon
                 src={calendar}
                 className="w-6 text-stone-200 dark:text-stone-200"
@@ -90,7 +108,7 @@ export default function Sidebar() {
           </li>
 
           <li className={liStyle}>
-            <NavLink to="/" className="px-3 py-3">
+            <NavLink to="/appartament" className="rounded-xl px-3 py-3">
               <Icon src={house} alt="ico-house" />
             </NavLink>
           </li>
@@ -99,7 +117,7 @@ export default function Sidebar() {
       <ul class="mt-auto flex h-sidebar-height flex-col justify-end gap-3">
         <li
           className="flex cursor-pointer justify-center"
-          onClick={() => setTheme((t) => !t)}
+          onClick={handleTheme}
         >
           <div className="c relative w-5 rounded-full border-[1px] border-stone-200 py-4 shadow shadow-stone-100 dark:border-stone-800 dark:shadow-stone-900">
             <div
@@ -114,13 +132,13 @@ export default function Sidebar() {
           </div>
         </li>
         <li className={liStyle}>
-          <NavLink to="/user" className="px-3 py-3">
+          <NavLink to="/user" className="rounded-xl px-3 py-3">
             <Icon src={user} alt="ico-user" />
           </NavLink>
         </li>
 
         <li className={liStyle}>
-          <NavLink to="/exit" className="px-3 py-3">
+          <NavLink to="/exit" className="rounded-xl px-3 py-3">
             <Icon src={exit} alt="ico-exit" />
           </NavLink>
         </li>

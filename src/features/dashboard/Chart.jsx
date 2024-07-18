@@ -76,12 +76,20 @@ export default function Chart() {
         {/*Show the data on hover */}
         <Tooltip contentStyle={styleTooltip} />
 
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          </linearGradient>
+        </defs>
         <Area
           type="monotone"
+          className="primaryChart"
           dataKey="uv"
-          stroke="#46B88E"
-          fill="#224437"
           name="Total"
+          fillOpacity={1}
+          fill="url(#colorUv)"
+          stroke="#82ca9d"
         />
       </AreaChart>
     </ResponsiveContainer>

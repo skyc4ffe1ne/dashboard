@@ -48,7 +48,13 @@ const styleTooltip = {
 export default function Chart_2() {
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="63%" data={data}>
+      <RadarChart
+        cx="50%"
+        cy="50%"
+        outerRadius="63%"
+        data={data}
+        className="radar"
+      >
         <PolarGrid />
         <PolarAngleAxis
           dataKey="subject"
@@ -58,8 +64,8 @@ export default function Chart_2() {
         <Radar
           name="Booking"
           dataKey="A"
-          stroke="#eab208"
-          fill="#eab208"
+          stroke="#06b5d4"
+          fill="#67e8f9"
           fillOpacity={0.4}
         />
       </RadarChart>
