@@ -113,7 +113,7 @@ export default function Sidebar() {
           </li>
         </ul>
       </nav>
-      <ul class="mt-auto flex h-sidebar-height flex-col justify-end gap-3">
+      <ul className="mt-auto flex h-sidebar-height flex-col justify-end gap-3">
         <li
           className="flex cursor-pointer justify-center"
           onClick={handleTheme}

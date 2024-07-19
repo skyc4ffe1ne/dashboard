@@ -56,6 +56,9 @@ const months = [
   "Dec",
 ];
 export default function Chart({ data }) {
+  {
+    /**Take all monts*/
+  }
   let newArr = data.map((el, i) => {
     const data = el.checkout_date.match(regex);
     el.month = data[0];
@@ -63,26 +66,43 @@ export default function Chart({ data }) {
   });
 
   function* generator() {
+    {
+      /**i to rapresent the number of the month */
+    }
     let i = 0;
     while (true) {
       i += 1;
+      {
+        /**Converting a into strings for match the API. */
+      }
       let a;
       if (i <= 9) {
         a = "0" + i;
       } else {
         a = "" + i;
       }
+      {
+        /**return only the current (month) */
+      }
       let filterArr = newArr.filter((el) => {
         return el.month === a;
       });
       let total = 0;
+      {
+        /**if return only 1, take the total price */
+      }
       if (filterArr.length === 1) {
         total = filterArr[0].total_price;
+      }
+      {
+        /**if there are more, sum it */
       }
       if (filterArr.length > 1) {
         total = filterArr.reduce((a, b) => a + b.total_price, 0);
       }
-
+      {
+        /**convert month number to string */
+      }
       let month = months[a - 1];
       yield { month, total };
     }

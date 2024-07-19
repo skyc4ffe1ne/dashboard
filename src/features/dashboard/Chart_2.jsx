@@ -11,32 +11,26 @@ const data = [
   {
     subject: "AirBnb",
     A: 120,
-    fullMark: 150,
   },
   {
     subject: "Booking",
     A: 98,
-    fullMark: 150,
   },
   {
     subject: "Expedia",
     A: 86,
-    fullMark: 150,
   },
   {
     subject: "Vrbo",
     A: 99,
-    fullMark: 150,
   },
   {
     subject: "Kayak",
     A: 85,
-    fullMark: 150,
   },
   {
     subject: "Trivago",
     A: 65,
-    fullMark: 150,
   },
 ];
 
@@ -45,10 +39,16 @@ const styleTooltip = {
   border: "none",
   padding: "10px",
 };
-export default function Chart_2() {
+const platforms = ["Airbnb", "Expedia", "Vrbo", "Kayak", "Trivago", "Booking"];
+export default function Chart_2({ data }) {
+  const finalData = platforms.map((el, i) => {
+    let a = data.filter((j) => j.booking_platform === el).length;
+    return { subject: el, a };
+  });
+
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="63%" data={data}>
+      <RadarChart cx="50%" cy="50%" outerRadius="63%" data={finalData}>
         <PolarGrid />
         <PolarAngleAxis
           dataKey="subject"
@@ -57,7 +57,7 @@ export default function Chart_2() {
         <Tooltip contentStyle={styleTooltip} />
         <Radar
           name="Booking"
-          dataKey="A"
+          dataKey="a"
           stroke="#06b5d4"
           fill="#67e8f9"
           fillOpacity={0.4}
