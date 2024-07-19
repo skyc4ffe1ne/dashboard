@@ -8,53 +8,92 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Jan",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Feb",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Mar",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Apr",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "May",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Jun",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-];
+// const data = [
+//   {
+//     name: "Jan",
+//     uv: 4000,
+//   },
+//   {
+//     name: "Feb",
+//     uv: 3000,
+//   },
+//   {
+//     name: "Mar",
+//     uv: 2000,
+//   },
+//   {
+//     name: "Apr",
+//     uv: 2780,
+//   },
+//   {
+//     name: "May",
+//     uv: 1890,
+//   },
+//   {
+//     name: "Jun",
+//     uv: 2390,
+//   },
+// ];
 
 const styleTooltip = {
-  // backgroundColor: "rgba(255, 255, 255, 0.5)",
   borderRadius: "0.25rem",
   border: "none",
   padding: "10px",
 };
+const regex = /(?<=-)\d+(?=-)/g;
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+export default function Chart({ data }) {
+  let newArr = data.map((el, i) => {
+    const data = el.checkout_date.match(regex);
+    el.month = data[0];
+    return el;
+  });
 
-export default function Chart() {
+  function* generator() {
+    let i = 0;
+    while (true) {
+      i += 1;
+      let a;
+      if (i <= 9) {
+        a = "0" + i;
+      } else {
+        a = "" + i;
+      }
+      let filterArr = newArr.filter((el) => {
+        return el.month === a;
+      });
+      let total = 0;
+      if (filterArr.length === 1) {
+        total = filterArr[0].total_price;
+      }
+      if (filterArr.length > 1) {
+        total = filterArr.reduce((a, b) => a + b.total_price, 0);
+      }
+
+      let month = months[a - 1];
+      yield { month, total };
+    }
+  }
+  const gen = generator();
+  let finalData = [];
+  for (let i = 0; i < 12; i++) {
+    const { value } = gen.next();
+    finalData = [...finalData, value];
+  }
+
   return (
     //Make the chart responsive
     <ResponsiveContainer
@@ -63,11 +102,11 @@ export default function Chart() {
       className="!lg:h-[65%] !h-[50%]"
     >
       {/* Visual chart */}
-      <AreaChart data={data}>
+      <AreaChart data={finalData}>
         <CartesianGrid strokeDasharray="6 6" />
         {/*Style labels, and show the XAxis */}
         <XAxis
-          dataKey="name"
+          dataKey="month"
           tick={{ fill: "#78716c" }}
           tickLine={{ stroke: "transparent" }}
           className="custom-tooltip text-sm font-extralight"
@@ -84,8 +123,7 @@ export default function Chart() {
         </defs>
         <Area
           type="monotone"
-          className="primaryChart"
-          dataKey="uv"
+          dataKey="total"
           name="Total"
           fillOpacity={1}
           fill="url(#colorUv)"

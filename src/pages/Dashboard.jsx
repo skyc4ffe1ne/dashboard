@@ -1,3 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+
+import { getData } from "../services/apiBookings.js";
+
+import Spinner from "../ui/Spinner.jsx";
 import Card from "../features/dashboard/Card.jsx";
 import Chart from "../features/dashboard/Chart.jsx";
 import Chart_2 from "../features/dashboard/Chart_2.jsx";
@@ -5,22 +10,16 @@ import Chart_3 from "../features/dashboard/Chart_3.jsx";
 import Icons from "../ui/Icons.jsx";
 import BlurEffect from "../ui/BlurEffect.jsx";
 import arrowChart from "../assets/arrowChart.svg";
-export default function Dashboard() {
-  const gridStyle = {
-    container:
-      "grid grid-cols-card-grid grid-rows-card-rows gap-[14px] px-2 sm:mx-auto sm:max-w-[640px] sm:grid-rows-card-rows-sm sm:px-8 lg:max-w-[1300px] lg:grid-cols-card-grid-lg xl:mx-0 xl:grid-cols-card-grid-xl xl:grid-rows-card-rows-xl xl:px-14",
-    card_1:
-      "col-start-1 col-end-3 row-start-2 h-[142px] rounded-xl border-[1px] border-slate-900/10 dark:border-stone-800 sm:col-start-2 sm:col-end-4 sm:row-start-1 lg:col-start-1 lg:col-end-2",
-    card_2:
-      "col-start-1 col-end-4 rounded-xl border-[1px] border-slate-900/10 lg:p-8 p-4 sm:row-start-2 lg:col-end-5 lg:row-end-4 xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-4 dark:border-stone-800 relative overflow-hidden mediaChart",
-    card_3:
-      "col-start-2 col-end-4 rounded-xl border-[1px] border-slate-900/10 dark:border-stone-800 sm:col-start-1 sm:col-end-3 sm:row-start-3 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-1 xl:row-start-3 xl:row-end-4",
-    card_4:
-      "col-start-3 row-start-2 h-[142px] rounded-xl sm:col-start-1 sm:row-start-1 lg:col-start-2 xl:col-start-1 xl:row-start-2 xl:row-end-4 xl:h-auto border-[1px] border-slate-900/10 dark:border-stone-800 relative overflow-hidden",
-    card_5:
-      "col-start-1 row-start-3 min-w-[138px] rounded-xl sm:col-start-3 lg:col-start-4 lg:row-start-1 xl:col-start-3 xl:row-start-1 xl:row-end-3 border-[1px] border-slate-900/10 dark:border-stone-800 relative overflow-hidden p-4",
-  };
 
+import { gridStyle } from "../features/dashboard/gridStyle.js";
+
+export default function Dashboard() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["booking"],
+    queryFn: getData,
+  });
+
+  if (isLoading) return <Spinner />;
   return (
     <>
       <div className="flex">
@@ -49,19 +48,19 @@ export default function Dashboard() {
           <p className="pb-6 pt-1 text-sm font-light text-stone-700 dark:text-stone-500">
             Growth Earning %2.6 From Last Year
           </p>
-          <Chart />
+          <Chart data={data} />
           <div className="flex justify-between">
             <div>
               <p className="pb-2 text-xs text-green-800 dark:text-green-100">
                 {" "}
                 Total Earns ($5.94B){" "}
               </p>
-              <h2 className="text-3xl font-extralight dark:text-stone-300">
+              <h2 className="text-2xl font-extralight dark:text-stone-300 sm:text-3xl">
                 0.00675 BTC{" "}
               </h2>
             </div>
-            <div className="flex items-center justify-center gap-4">
-              <h3 className="text-3xl font-extralight text-stone-700 dark:text-stone-300">
+            <div className="flex items-center justify-center gap-2 sm:gap-4">
+              <h3 className="text-2xl font-extralight text-stone-700 dark:text-stone-300 sm:text-3xl">
                 + 5.7%
               </h3>
               <div className="rounded-full border-[1px] border-slate-900/10 dark:border-stone-800">

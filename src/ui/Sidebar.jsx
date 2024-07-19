@@ -21,7 +21,6 @@ export default function Sidebar() {
   useEffect(function () {
     /**Check for saved theme at first render */
     const themeSaved = localStorage.getItem("theme");
-    console.log(themeSaved);
     if (themeSaved !== null) {
       setTheme(JSON.parse(themeSaved)); // Imposta il tema salvato dal localStorage
       // Aggiorna il documento HTML con la classe del tema (opzionale)
