@@ -87,7 +87,7 @@ export default function Dashboard() {
         <div className={gridStyle.card_5}>
           <BlurEffect type="lg-r-violet" />
           <BlurEffect type="sm-l-violet" />
-          <Chart_3 />
+          <Chart_3 data={data} />
         </div>
       </div>
     </>

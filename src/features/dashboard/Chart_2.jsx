@@ -7,39 +7,14 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  {
-    subject: "AirBnb",
-    A: 120,
-  },
-  {
-    subject: "Booking",
-    A: 98,
-  },
-  {
-    subject: "Expedia",
-    A: 86,
-  },
-  {
-    subject: "Vrbo",
-    A: 99,
-  },
-  {
-    subject: "Kayak",
-    A: 85,
-  },
-  {
-    subject: "Trivago",
-    A: 65,
-  },
-];
-
 const styleTooltip = {
   borderRadius: "0.25rem",
   border: "none",
   padding: "10px",
 };
+
 const platforms = ["Airbnb", "Expedia", "Vrbo", "Kayak", "Trivago", "Booking"];
+
 export default function Chart_2({ data }) {
   const finalData = platforms.map((el, i) => {
     let a = data.filter((j) => j.booking_platform === el).length;

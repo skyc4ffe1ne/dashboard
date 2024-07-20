@@ -1,4 +1,5 @@
-import { parseISO, format } from "date-fns";
+import { differenceInDays, parseISO } from "date-fns";
+
 let bookings = [
   {
     name: "Mario Rossi",
@@ -156,64 +157,51 @@ let bookings = [
   },
 ];
 
-const regex = /(?<=-)\d+(?=-)/g;
+const startData = [
+  { duration: "1 night", value: 0 },
+  { duration: "2 nights", value: 0 },
+  { duration: "3 nights", value: 0 },
+  { duration: "4-5 nights", value: 0 },
+  { duration: "6-7 nights", value: 0 },
+  { duration: "8-14 nights", value: 0 },
+  { duration: "15-21 nights", value: 0 },
+  { duration: "21+ nights", value: 0 },
+];
 
-// let newArr = bookings.map((el, i) => {
-//   const data = el.checkout_date.match(regex);
-//   el.month = data[0];
-//   return el;
-// });
-const platforms = ["Airbnb", "Expedia", "Vrbo", "Kayak", "Trivago", "Booking"];
-// let totaltLenght = [];
-// console.time("for");
-// for (let i = 0; i < platforms.length; i++) {
-//   let newArr = bookings.filter((el) => {
-//     return el.booking_platform === platforms[i];
-//   });
+function getDurationCategory(difference) {
+  if (difference === 1) return "1 night";
+  if (difference === 2) return "2 nights";
+  if (difference === 3) return "3 nights";
+  if (difference >= 4 && difference <= 5) return "4-5 nights";
+  if (difference >= 6 && difference <= 7) return "6-7 nights";
+  if (difference >= 8 && difference <= 14) return "8-14 nights";
+  if (difference >= 15 && difference <= 21) return "15-21 nights";
+  if (difference >= 22) return "21+ nights";
+  return null;
+}
 
-//   totaltLenght = [...totaltLenght, newArr.length];
-// }
-// console.timeEnd("for");
+const updatedData = bookings.reduce((acc, el) => {
+  {
+    /**calculate the difference */
+  }
+  const convCheckin = parseISO(el.checkin_date);
+  const convCheckout = parseISO(el.checkout_date);
+  const difference = differenceInDays(convCheckout, convCheckin);
 
-// console.log(totaltLenght);
-console.time("mapfilter");
-let newArr2 = platforms.map((el, i) => {
-  return bookings.filter((j) => j.booking_platform === el).length;
-});
-// console.log(newArr2);
-console.timeEnd("mapfilter");
-
-// function* generator() {
-//   let i = 0;
-//   while (true) {
-//     i += 1;
-//     let a;
-//     if (i <= 9) {
-//       a = "0" + i;
-//     } else {
-//       a = "" + i;
-//     }
-//     let filterArr = newArr.filter((el) => {
-//       return el.month === a;
-//     });
-//     let total = 0;
-//     if (filterArr.length === 1) {
-//       total = filterArr[0].total_price;
-//     }
-//     if (filterArr.length > 1) {
-//       total = filterArr.reduce((a, b) => a + b.total_price, 0);
-//     }
-
-//     let month = months[a - 1];
-//     yield { month, total };
-//   }
-// }
-
-// const gen = generator();
-
-// let data = [];
-// for (let i = 0; i < 12; i++) {
-//   const { value } = gen.next();
-//   data = [...data, value];
-// }
-// console.log(finalData);
+  const durationCategory = getDurationCategory(difference);
+  {
+    /**assigns the label based on the difference */
+  }
+  if (durationCategory) {
+    // finde the obj
+    const categoryObj = acc.find((item) => item.duration === durationCategory);
+    //update the value
+    if (categoryObj) {
+      categoryObj.value += 1;
+    }
+  }
+  {
+    /**return the new array */
+  }
+  return acc;
+}, startData);
