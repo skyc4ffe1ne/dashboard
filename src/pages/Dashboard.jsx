@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getData } from "../services/apiBookings.js";
 
-import Spinner from "../ui/Spinner.jsx";
+import SpinnerDashboard from "../ui/SpinnerDashboard.jsx";
 import Card from "../features/dashboard/Card.jsx";
 import Chart from "../features/dashboard/Chart.jsx";
 import Chart_2 from "../features/dashboard/Chart_2.jsx";
@@ -19,7 +19,7 @@ export default function Dashboard() {
     queryFn: getData,
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <SpinnerDashboard />;
   return (
     <>
       <div className="flex">

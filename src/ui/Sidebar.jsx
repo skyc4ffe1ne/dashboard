@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 
 import { NavLink } from "react-router-dom";
 
+import { useClickOutside } from "../hooks/useClickOutside.js";
+import { useResize } from "../hooks/useResize.js";
+
 import calendar from "../assets/calendar.svg";
 import dashboard from "../assets/dashboard.svg";
 import logo from "../assets/logo.svg";
@@ -16,7 +19,9 @@ import Icon from "./Icons.jsx";
 export default function Sidebar() {
   const [theme, setTheme] = useState(false);
   const [visible, setVisible] = useState(true);
-  const sidebarRef = useRef(null);
+
+  const sidebarRef = useClickOutside(setVisible);
+  useResize(setVisible);
 
   useEffect(function () {
     /**Check for saved theme at first render */
@@ -30,31 +35,6 @@ export default function Sidebar() {
         document.documentElement.classList.remove("dark");
       }
     }
-  }, []);
-
-  function handleResize() {
-    if (window.innerWidth < 640) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
-  }
-
-  const handleClickOutside = (event) => {
-    // .current verify if i'm on the sidebar
-    // childer of sidebar?
-    if (
-      sidebarRef.current &&
-      !sidebarRef.current.contains(event.target) &&
-      window.innerWidth < 640
-    ) {
-      setVisible(false);
-    }
-  };
-
-  useEffect(function () {
-    window.addEventListener("resize", handleResize);
-    document.addEventListener("mousedown", handleClickOutside);
   }, []);
 
   function handleTheme() {

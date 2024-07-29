@@ -1,9 +1,13 @@
 import { gridStyle } from "../features/dashboard/gridStyle.js";
 
-export default function Spinner() {
+export default function SpinnerDashboard() {
   return (
     <>
-      <div className={gridStyle.container + " mt-[200px] gap-12"}>
+      <div className="mx-12 mt-10 h-[128px] w-[265px]">
+        <div className="mt-2 h-1/4 w-1/2 animate-pulse rounded-lg bg-stone-200 dark:bg-stone-800"></div>
+        <div className="mt-4 h-1/2 w-11/12 animate-pulse rounded-lg bg-stone-200 dark:bg-stone-800"></div>
+      </div>
+      <div className={gridStyle.container + " gap-12"}>
         <div className={gridStyle.card_1 + " px-4"}>
           <div className="mt-2 h-1/4 w-1/2 animate-pulse rounded-lg bg-stone-200 dark:bg-stone-800"></div>
           <div className="mt-4 h-1/2 w-11/12 animate-pulse rounded-lg bg-stone-200 dark:bg-stone-800"></div>
